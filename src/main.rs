@@ -1,15 +1,6 @@
-use image::{ImageBuffer, Rgb};
-use std::env;
+use image::{ImageBuffer, Pixel, Rgb};
 
-const SCALE: u32 = 15;
-
-fn get_current_working_dir() -> String {
-    let res = env::current_dir();
-    match res {
-        Ok(path) => path.into_os_string().into_string().unwrap(),
-        Err(_) => "FAILED".to_string(),
-    }
-}
+const SCALE: u32 = 20;
 
 fn print_dimensions(img: ImageBuffer<Rgb<u8>, Vec<u8>>) {
     println!(
@@ -22,9 +13,6 @@ fn print_dimensions(img: ImageBuffer<Rgb<u8>, Vec<u8>>) {
 }
 
 fn main() {
-    // env::set_var("RUST_BACKTRACE", "1");
-
-    print!("Hello, world!, {}", get_current_working_dir());
     let img = image::open("./src/myimage.JPG").unwrap();
 
     img.save("./output_images/test.jpg").unwrap();
@@ -48,14 +36,16 @@ fn main() {
     print_dimensions(simple_img.clone());
 
     for (x, y, pixel) in rgb_img.enumerate_pixels() {
-        sum_of_squares[(x / SCALE) as usize][(y / SCALE) as usize][0] += (pixel[0] as u32).pow(2);
-        sum_of_squares[(x / SCALE) as usize][(y / SCALE) as usize][1] += (pixel[1] as u32).pow(2);
-        sum_of_squares[(x / SCALE) as usize][(y / SCALE) as usize][2] += (pixel[2] as u32).pow(2);
+        for (total_sqr, color) in sum_of_squares[(x / SCALE) as usize][(y / SCALE) as usize]
+            .iter_mut()
+            .zip(pixel.channels().iter())
+        {
+            *total_sqr += (*color as u32).pow(2);
+        }
     }
 
     for (x, row) in sum_of_squares.iter_mut().enumerate() {
         for (y, pixel) in row.iter_mut().enumerate() {
-            // print!("x is {} y is {}", x, y);
             let new_pixel = Rgb(pixel.map(|x| ((x as f32).sqrt() as u32 / (SCALE)) as u8));
             simple_img.put_pixel(x as u32, y as u32, new_pixel);
         }
