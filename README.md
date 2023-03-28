@@ -15,6 +15,16 @@ Map each downscaled master pixel to most similar sample average color. Output wi
 
 Stitch together images to make one mega-sized collage.
 
+### Progress
+
+- [x] Master downscale
+  - [ ] Tweak x/y scaling
+- [x] Sample downscale
+- [x] Sample averager
+  - [ ] Convert output to hashmap
+- [ ] Pixel-to-pic mapper
+- [ ] Collage stitcher
+
 ## Downscaler
 
 So I started out with some basic blurring by just averaging out rgb values.
