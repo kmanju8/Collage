@@ -30,6 +30,8 @@ currently average squares of pixels: but most of my photos are 4:3 aspect ratio!
 
 ## RGB Average Identifier
 
+For efficient processing, thinking of having a preproc stage where every sample image is downscaled first: this needs to be done anyway for the final collage so may as well get it done here to make RGB averages easier to calculate.
+
 Need to make same consideration as downscaler. Average has to be root sum of squares mean, not linear mean. This will play in later stages as well.
 
 ## Image Mapper
