@@ -10,13 +10,12 @@ use image::{ImageBuffer, Pixel, Rgb};
 //     );
 // }
 
-pub fn downscale(master_path: &str, scale: u32){
+pub fn downscale(master_path: &str, output_path: &str, scale: u32) {
     let img = image::open(master_path).unwrap();
 
     img.save("./output_images/test.jpg").unwrap();
 
     let rgb_img = img.to_rgb8();
-
 
     let (width, height) = rgb_img.dimensions();
 
@@ -47,7 +46,5 @@ pub fn downscale(master_path: &str, scale: u32){
         }
     }
 
-    simple_img
-        .save(format!("./output_images/testImproved{}.jpg", scale))
-        .unwrap();
+    simple_img.save(output_path).unwrap();
 }
