@@ -28,6 +28,20 @@ Will illustrate the difference between accounting for this difference with a bef
 
 currently average squares of pixels: but most of my photos are 4:3 aspect ratio! So need to have a separate scale factor for x and y axis, such that resulting downscaled image is (approx) a square. This was, when each square is replaced by a 4:3 picture, the final collage is the same aspect ratio as the master image.
 
+### High Dynamic Range (HDR)
+
+I could add a HDR step prior/after downscaling the master image. HDR essentially looks at the distribution of colors, and if there is an overabundance up of lighter/darker colors (and lack of the other) it ups the contrast of the colours e.g. and example looking at just red values:
+
+
+| Pixel | 1 | 2 | 3 |
+| --- |--- | ---| --- |
+| Old R | 0 | 1 | 2 |
+| HDR R | 0 | 128 | 256 |
+
+(Note: may have to scale radially than by each cartisian color coordinate. Worth experimenting.)
+
+This is definitely not a step that is required - but it'll lead to a clearer final collage which would certainly be much needed. Also might just use Google Photos inbuilt HDR function lol.
+
 ## RGB Average Identifier
 
 For efficient processing, thinking of having a preproc stage where every sample image is downscaled first: this needs to be done anyway for the final collage so may as well get it done here to make RGB averages easier to calculate.
