@@ -24,12 +24,6 @@ pub fn downscale(master_path: &str, output_path: &str, scale: u32) {
     let mut simple_img =
         ImageBuffer::<Rgb<u8>, Vec<u8>>::new(width / scale + 1, height / scale + 1);
 
-    print!(
-        "sum of squares size is {}x{}",
-        sum_of_squares.len(),
-        sum_of_squares[0].len()
-    );
-
     for (x, y, pixel) in rgb_img.enumerate_pixels() {
         for (total_sqr, color) in sum_of_squares[(x / scale) as usize][(y / scale) as usize]
             .iter_mut()
