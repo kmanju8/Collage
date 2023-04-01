@@ -21,7 +21,7 @@ Stitch together images to make one mega-sized collage.
   - [ ] Tweak x/y scaling
 - [x] Sample downscale
 - [x] Sample averager
-  - [ ] Convert output to hashmap
+  - [x] Convert output to hashmap
 - [ ] Pixel-to-pic mapper
 - [ ] Collage stitcher
 
